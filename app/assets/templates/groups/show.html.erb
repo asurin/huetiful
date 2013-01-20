@@ -1,0 +1,25 @@
+<h1>Group</h1>
+
+<p>
+  <b>Name</b><br>
+  {{group.name}}
+</p>
+
+<p>
+  <b>Bridge</b><br>
+  {{group.bridge_id}}
+</p>
+
+<div class="form-actions">
+  <a href="/groups/{{group.id}}/edit"
+    class="btn btn-primary"><i class="icon-edit"></i>
+    Edit Group
+  </a>
+  <button ng-click="destroy()" class="btn btn-danger">
+    <i class="icon-trash"></i> Delete
+  </button>
+  <a href="/groups" class="btn">
+    Back to groups
+  </a>
+</div>
+

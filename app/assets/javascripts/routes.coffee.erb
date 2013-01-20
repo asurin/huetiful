@@ -1,0 +1,45 @@
+root = global ? window
+angular = root.angular
+thisApp = angular.module("HuetifulClient", ['ngCookies', 'lights', 'groups', 'bridges', 'discover', 'ui']).config(['$routeProvider', '$locationProvider' ,
+($routeProvider, $locationProvider) ->
+  $routeProvider.when("/bridges",
+    controller: BridgesIndexCtrl
+    templateUrl: '<%= asset_path("bridges/index.html") %>'
+  ).when("/bridges/new",
+    controller: BridgesCreateCtrl
+    templateUrl: '<%= asset_path("bridges/new.html") %>'
+  ).when("/bridges/:id",
+    controller: BridgesShowCtrl
+    templateUrl: '<%= asset_path("bridges/show.html") %>'
+  ).when("/bridges/:id/edit",
+    controller: BridgesEditCtrl
+    templateUrl: '<%= asset_path("bridges/edit.html") %>'
+  ).when("/bridges/:id/groups",
+    controller: GroupsIndexCtrl
+    templateUrl: '<%= asset_path("groups/index.html") %>'
+  ).when("/bridges/:id/groups/new",
+    controller: GroupsCreateCtrl
+    templateUrl: '<%= asset_path("groups/new.html") %>'
+  ).when("/bridges/:id/groups/:id",
+    controller: GroupsShowCtrl
+    templateUrl: '<%= asset_path("groups/show.html") %>'
+  ).when("/bridges/:id/groups/:id/edit",
+    controller: GroupsEditCtrl
+    templateUrl: '<%= asset_path("groups/edit.html") %>'
+  ).when("/bridges/:id/groups/:id/lights",
+    controller: LightsIndexCtrl
+    templateUrl: '<%= asset_path("lights/index.html") %>'
+  ).when("/bridges/:id/groups/:id/lights/new",
+    controller: LightsCreateCtrl
+    templateUrl: '<%= asset_path("lights/new.html") %>'
+  ).when("/bridges/:id/groups/:id/lights/:id",
+    controller: LightsShowCtrl
+    templateUrl: '<%= asset_path("lights/show.html") %>'
+  ).when("/bridges/:id/groups/:id/lights/:id/edit",
+    controller: LightsEditCtrl
+    templateUrl: '<%= asset_path("lights/edit.html") %>'
+  ).otherwise redirectTo: "/bridges"
+])
+
+root.thisApp = thisApp
+

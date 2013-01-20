@@ -1,0 +1,102 @@
+<form name="editBridge">
+  <fieldset>
+    <legend>
+      Edit Bridge
+    </legend>
+      <div class="control-group">
+        <label class="control-label">
+          Name
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="bridge[name]"
+                   ng-model="bridge.name"
+                   class="text_field"
+                   required>
+          <span ng-show="editBridge.name.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Ip Address
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="bridge[ip_address]"
+                   ng-model="bridge.ip_address"
+                   class="text_field"
+                   required>
+          <span ng-show="editBridge.ip_address.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Mac Address
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="bridge[mac_address]"
+                   ng-model="bridge.mac_address"
+                   class="text_field"
+                   required>
+          <span ng-show="editBridge.mac_address.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Username
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="bridge[username]"
+                   ng-model="bridge.username"
+                   class="text_field"
+                   required>
+          <span ng-show="editBridge.username.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Valid
+        </label>
+        <div class="controls">
+            <input type="check"
+                   name="bridge[valid]"
+                   ng-model="bridge.valid"
+                   class="check_box"
+                   required>
+          <span ng-show="editBridge.valid.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+    <div class="form-actions">
+      <button class="btn btn-success" ng-click="save()"
+        ng-disabled="isClean() || editBridge.$invalid">
+        Save
+      </button>
+      <button ng-click="destroy()"
+              ng-show="bridge.id"
+              class="btn btn-danger">
+              <i class="icon-trash"></i>Delete
+      </button>
+      <a href="/bridges" class="btn">
+        Back to bridges
+      </a>
+    </div>
+  </fieldset>
+</form>
+

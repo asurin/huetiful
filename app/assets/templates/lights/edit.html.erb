@@ -1,0 +1,214 @@
+<form name="editLight">
+  <fieldset>
+    <legend>
+      Edit Light
+    </legend>
+      <div class="control-group">
+        <label class="control-label">
+          Name
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="light[name]"
+                   ng-model="light.name"
+                   class="text_field"
+                   required>
+          <span ng-show="editLight.name.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          On
+        </label>
+        <div class="controls">
+            <input type="check"
+                   name="light[on]"
+                   ng-model="light.on"
+                   class="check_box"
+                   required>
+          <span ng-show="editLight.on.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Brightness
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="light[brightness]"
+                   ng-model="light.brightness"
+                   class="number_field"
+                   required>
+          <span ng-show="editLight.brightness.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Hue
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="light[hue]"
+                   ng-model="light.hue"
+                   class="number_field"
+                   required>
+          <span ng-show="editLight.hue.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Saturation
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="light[saturation]"
+                   ng-model="light.saturation"
+                   class="number_field"
+                   required>
+          <span ng-show="editLight.saturation.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          X
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="light[x]"
+                   ng-model="light.x"
+                   class="number_field"
+                   required>
+          <span ng-show="editLight.x.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Y
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="light[y]"
+                   ng-model="light.y"
+                   class="number_field"
+                   required>
+          <span ng-show="editLight.y.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Ct
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="light[ct]"
+                   ng-model="light.ct"
+                   class="number_field"
+                   required>
+          <span ng-show="editLight.ct.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Alert
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="light[alert]"
+                   ng-model="light.alert"
+                   class="text_field"
+                   required>
+          <span ng-show="editLight.alert.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Effect
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="light[effect]"
+                   ng-model="light.effect"
+                   class="text_field"
+                   required>
+          <span ng-show="editLight.effect.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Color Mode
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="light[color_mode]"
+                   ng-model="light.color_mode"
+                   class="text_field"
+                   required>
+          <span ng-show="editLight.color_mode.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Reachable
+        </label>
+        <div class="controls">
+            <input type="check"
+                   name="light[reachable]"
+                   ng-model="light.reachable"
+                   class="check_box"
+                   required>
+          <span ng-show="editLight.reachable.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+    <div class="form-actions">
+      <button class="btn btn-success" ng-click="save()"
+        ng-disabled="isClean() || editLight.$invalid">
+        Save
+      </button>
+      <button ng-click="destroy()"
+              ng-show="light.id"
+              class="btn btn-danger">
+              <i class="icon-trash"></i>Delete
+      </button>
+      <a href="/lights" class="btn">
+        Back to lights
+      </a>
+    </div>
+  </fieldset>
+</form>
+

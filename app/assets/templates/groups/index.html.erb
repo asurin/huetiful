@@ -1,0 +1,37 @@
+<h1>Groups</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Bridge</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="group in groups">
+      <td>
+        <a href="/groups/{{group.id}}">
+          {{group.name}}
+        </a>
+      </td>
+        <td>
+          {{group.bridge_id}}
+        </td>
+      <td>
+        <a href="/groups/{{group.id}}/edit"
+          class="btn btn-primary"><i class="icon-edit"></i>
+          Edit
+        </a>
+        <button ng-click="destroy()" class="btn btn-danger">
+          <i class="icon-trash"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  <a href='/groups/new' class="btn btn-primary">
+    <i class="icon-plus"></i>New
+  </a>
+</p>

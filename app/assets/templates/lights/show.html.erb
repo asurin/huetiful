@@ -1,0 +1,75 @@
+<h1>Light</h1>
+
+<p>
+  <b>Name</b><br>
+  {{light.name}}
+</p>
+
+<p>
+  <b>On</b><br>
+  {{light.on}}
+</p>
+
+<p>
+  <b>Brightness</b><br>
+  {{light.brightness}}
+</p>
+
+<p>
+  <b>Hue</b><br>
+  {{light.hue}}
+</p>
+
+<p>
+  <b>Saturation</b><br>
+  {{light.saturation}}
+</p>
+
+<p>
+  <b>X</b><br>
+  {{light.x}}
+</p>
+
+<p>
+  <b>Y</b><br>
+  {{light.y}}
+</p>
+
+<p>
+  <b>Ct</b><br>
+  {{light.ct}}
+</p>
+
+<p>
+  <b>Alert</b><br>
+  {{light.alert}}
+</p>
+
+<p>
+  <b>Effect</b><br>
+  {{light.effect}}
+</p>
+
+<p>
+  <b>Color mode</b><br>
+  {{light.color_mode}}
+</p>
+
+<p>
+  <b>Reachable</b><br>
+  {{light.reachable}}
+</p>
+
+<div class="form-actions">
+  <a href="/lights/{{light.id}}/edit"
+    class="btn btn-primary"><i class="icon-edit"></i>
+    Edit Light
+  </a>
+  <button ng-click="destroy()" class="btn btn-danger">
+    <i class="icon-trash"></i> Delete
+  </button>
+  <a href="/lights" class="btn">
+    Back to lights
+  </a>
+</div>
+

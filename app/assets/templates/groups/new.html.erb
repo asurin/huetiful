@@ -1,0 +1,52 @@
+<form name="newGroup">
+  <fieldset>
+    <legend>
+      New Group
+    </legend>
+      <div class="control-group">
+        <label class="control-label">
+          Name
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="group[name]"
+                   ng-model="group.name"
+                   class="text_field"
+                   required>
+          <span ng-show="newGroup.name.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Bridge
+        </label>
+        <div class="controls">
+            <input type="number"
+                   name="group[bridge_id]"
+                   ng-model="group.bridge_id"
+                   class="number_field"
+                   required>
+          <span ng-show="newGroup.bridge_id.$error.required"
+                class="help-inline">
+            Required
+          </span>
+        </div>
+      </div>
+    <div class="form-actions">
+      <button class="btn btn-success" ng-click="save()"
+        ng-disabled="isClean() || newGroup.$invalid">
+        <i class="icon-save"></i> Save
+      </button>
+      <button ng-click="destroy()"
+              ng-show="group.id"
+              class="btn btn-danger">
+              <i class="icon-trash"></i> Delete
+      </button>
+      <a href="/groups" class="btn">Back to groups</a>
+    </div>
+  </fieldset>
+</form>
+

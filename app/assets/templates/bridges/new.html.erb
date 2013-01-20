@@ -1,0 +1,17 @@
+<div>
+  <span ui-if="scannedAndNotFound()" ng-cloak>
+    <h3>We're Sorry!</h3>
+    <p>We can't currently find a Hue bridge!  Please ensure that both your bridge and the computer running Huetiful are powered, and connected to the same network.  Once you've done that, click on the button below to try again!</p>
+    <button class="btn btn-primary btn-large" ng-click="scan()">
+      Try Again!
+    </button>
+  </span>
+  <span ui-if="availableBridges.length > 0">
+    <h3>Got One!</h3>
+    <p>We've detected a hue bridge (or more, if you're being fancy) on your network.  Please enter a name for the bridge you want to use, and click on the add button next to it!</p>
+    <span ng-repeat="bridge in availableBridges">
+        {{bridge.host}}
+    </span>
+  </span>
+
+</div>

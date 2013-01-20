@@ -1,0 +1,18 @@
+<div class="row">
+    <div ui-if="bridges.length == 0">
+        <div class="span12">
+          <div class="hero-unit">
+            <h1>Welcome to Huetiful!</h1>
+            <p>It looks like this is your first time using Huetiful.  Before we can begin, you'll have to complete a few basic steps to authorize this computer with the Hue bridge.  When you're ready to start, click on the button below</p>
+            <p>
+              <a class="btn btn-primary btn-large" href="#/bridges/new">
+                Let's Go
+              </a>
+            </p>
+          </div>
+        </div>
+    </div>
+    <div ui-if="bridges.length != 0">
+        <!-- Normal render here -->
+    </div>
+</div>
