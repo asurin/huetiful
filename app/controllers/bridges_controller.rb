@@ -7,10 +7,50 @@ class BridgesController < ApplicationController
 
   def discover
     begin
-      render :json => [*Ruhue.discover]
+      hues = [*Ruhue.discover]
+      bridges = Array.new
+      hues.each do |hue|
+        bridge = Bridge.find_by_host(hue.host)
+        if bridge.nil? || !Ruhue::Client.new(hue, bridge.username).registered?
+          bridges << hue
+        else
+          bridges << bridge
+        end
+      end
+      render :json => bridges
     rescue Ruhue::TimeoutError => timeout
       Rails.logger.warn(timeout.message)  # Just return an empty array, the user's going to be asked to retry anyhow
       render :json => []
+    end
+  end
+
+  def create
+    begin
+      # TODO: More detailed error handling, specifically the case where we can no longer find the hue passed up
+      host = params[:host]
+      username = params[:username]
+      bridge = Bridge.find_by_host(host)
+      hues = [*Ruhue.discover]
+      hue = nil
+      hues.each { |opt| hue = opt if opt.host == host }
+      client = Ruhue::Client.new(hue, username)
+      unless client.registered?
+        bridge.delete! unless bridge.nil?
+        client.register('Huetiful')
+        bridge = Bridge.new(:host => host, :username => client.username, :name => 'Huetiful', :registered => true)
+        bridge.save!
+      end
+      if bridge.nil?
+        bridge = Bridge.new(:host => host, :username => client.username, :name => 'Huetiful', :registered => true)
+        bridge.save!
+      end
+      render :json => bridge
+    rescue Exception => e
+      Rails.logger.error(e.message)
+      Rails.logger.error(e.backtrace)
+      render :json => {:error => e}
+    rescue Ruhue::APIError => e
+      render :json => {:error => e} # No need to log anything here - we know this was pretty much guaranteed to be because they didn't hit pair
     end
   end
 

@@ -1,3 +1,23 @@
 // Place all the styles related to the bridge controller here.
 // They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hue-indent {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.hue-add {
+  padding-left: 20px;
+  margin-top: 10px;
+  input[type="text"] {
+    width: 400px;
+  }
+  button {
+    margin-top: -10px;
+    margin-left: 10px;
+  }
+  .alert {
+    width: 415px;
+  }
+}

@@ -17,5 +17,17 @@
 @import "bridge";
 @import "group";
 @import "light";
+@import "font-awesome";
 
-.center {text-align: center;}
+.center {
+  text-align: center;
+}
+
+.font-awesome-title {
+  font-size: 30px;
+  i {
+    padding-left: 20px;
+    padding-right: 15px;
+    color: #327CCB;
+  }
+}

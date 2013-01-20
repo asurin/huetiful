@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(:version => 20130119231317) do
 
   create_table "bridges", :force => true do |t|
     t.string   "name"
-    t.string   "ip_address"
+    t.string   "host"
     t.string   "mac_address"
     t.string   "username"
-    t.boolean  "valid"
+    t.boolean  "registered"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

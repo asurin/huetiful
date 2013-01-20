@@ -17,9 +17,14 @@ BridgesCreateCtrl = ($scope, $location, Bridge, Discover) ->
   $scope.scan = ->
     Discover.query (data) ->
       $scope.availableBridges = data
-  $scope.save = ->
-    Bridge.save $scope.bridge, (bridge) ->
-      $location.path "/bridges/#{bridge.id}/edit"
+  $scope.save = ($index) ->
+    $scope.retryIndex = null
+    Bridge.save $scope.availableBridges[$index], (bridge) ->
+      #$location.path "/bridges/#{bridge.id}"
+      if bridge.error?
+        $scope.retryIndex = $index
+      else
+        console.log(bridge)
   $scope.scannedAndNotFound = ->
     $scope.availableBridges != null && $scope.availableBridges.length == 0 # Prevent flicker in due to uPnP being slow/multicast fail
   $scope.scan()

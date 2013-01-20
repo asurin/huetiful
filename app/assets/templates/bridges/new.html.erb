@@ -1,17 +1,51 @@
 <div>
-  <span ui-if="scannedAndNotFound()" ng-cloak>
+  <div ui-if="scannedAndNotFound()" ng-cloak>
     <h3>We're Sorry!</h3>
-    <p>We can't currently find a Hue bridge!  Please ensure that both your bridge and the computer running Huetiful are powered, and connected to the same network.  Once you've done that, click on the button below to try again!</p>
+
+    <p>We can't currently find a Hue bridge! Please ensure that both your bridge and the computer running Huetiful are
+      powered, and connected to the same network. Once you've done that, click on the button below to try again!</p>
     <button class="btn btn-primary btn-large" ng-click="scan()">
       Try Again!
     </button>
-  </span>
-  <span ui-if="availableBridges.length > 0">
+  </div>
+  <div ui-if="availableBridges.length > 0">
     <h3>Got One!</h3>
-    <p>We've detected a hue bridge (or more, if you're being fancy) on your network.  Please enter a name for the bridge you want to use, and click on the add button next to it!</p>
-    <span ng-repeat="bridge in availableBridges">
-        {{bridge.host}}
-    </span>
-  </span>
+
+    <p>We've detected a hue bridge (or more, if you're being fancy) on your network. Please enter a name for the bridge
+      you want to use, and click on the add button next to it!</p>
+
+    <div class="hue-indent row alert alert-error" ng-show="retryIndex != undefined && retryIndex != null">
+      <p><strong>We weren't able to register Huetiful with your Hue Bridge</strong> - did you hit the 'Pair' button less than 30 seconds before clicking add?</p>
+      <p>To try again, click on the button below</p>
+      <button class="btn btn-success" ng-click="save(retryIndex)">
+        Try Again!
+      </button>
+    </div>
+
+    <div ng-repeat="bridge in availableBridges">
+      <br/>
+      <div class="row font-awesome-title">
+        <i class="icon-rss"></i><span>{{bridge.host}}</span>
+      </div>
+      <ng-form name="add" ui-if="bridge.registered == undefined">
+        <div class="hue-add">
+            <div class="row">
+              <input type="text" name="bridgeName" ng-model="bridge.username" placeholder="Enter the name you'd like to use for this bridge" required ng-minlength="10" ng-maxlength="40" ng-pattern="/^[a-zA-Z0-9]+$/">
+              <button class="btn btn-success" ng-disabled="add.$invalid" ng-click="save($index)"><i class="icon-plus"></i></button>
+            </div>
+            <div class="row alert alert-error" ng-show="add.$invalid">
+              <span class="error" ng-show="add.bridgeName.$error.required">You must enter a username</span>
+              <span class="error" ng-show="add.bridgeName.$error.minlength">Minimum length is 10 characters</span>
+              <span class="error" ng-show="add.bridgeName.$error.maxlength">Maximum length is 40 characters</span>
+              <span class="error" ng-show="add.bridgeName.$error.pattern">Name must contain only alphanumeric characters</span>
+            </div>
+        </div>
+      </ng-form>
+      <div ui-if="bridge.registered != undefined">
+        This bridge is already registered with Huetiful, so you should be good to go here!
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
