@@ -1,5 +1,5 @@
 <div class="row">
-    <div ui-if="bridges.length == 0">
+    <div ui-if="showHero()">
         <div class="span12">
           <div class="hero-unit">
             <h1>Welcome to Huetiful!</h1>
@@ -12,7 +12,12 @@
           </div>
         </div>
     </div>
-    <div ui-if="bridges.length != 0">
-        <!-- Normal render here -->
+    <div ui-if="!showHero()">
+      <h3>Select your Hue Bridge from the list below</h3>
+      <div ng-repeat="bridge in bridges">
+        <div class="row font-awesome-title">
+            <i class="icon-rss"></i><a href="#/bridges/{{bridge.id}}">{{bridge.name}}</a>
+        </div>
+      </div>
     </div>
 </div>

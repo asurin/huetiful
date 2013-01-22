@@ -6,9 +6,9 @@ class CreateLights < ActiveRecord::Migration
       t.integer         :brightness
       t.integer         :hue
       t.integer         :saturation
-      t.integer         :x
-      t.integer         :y
-      t.integer         :ct
+      t.float           :x
+      t.float           :y
+      t.float           :ct
       t.string          :alert
       t.string          :effect
       t.string          :color_mode

@@ -1,16 +1,24 @@
 
 root = global ? window
 
-BridgesIndexCtrl = ($scope, Bridge) ->
-  $scope.bridges = Bridge.query()
+BridgesIndexCtrl = ($scope, $location, Bridge) ->
+  $scope.bridges = null
+  Bridge.query (data) ->
+    if data.length == 1
+      $location.path "/bridges/#{data[0].id}"
+    else
+      $scope.bridges = data
+
   $scope.destroy = ->
     dconfirm = confirm("Are you sure?")
     if dconfirm
       original = @bridge
       @bridge.destroy ->
         $scope.bridges = _.without($scope.bridges, original)
+  $scope.showHero = ->
+    $scope.bridges != null && $scope.bridges.length == 0
 
-BridgesIndexCtrl.$inject = ['$scope', 'Bridge'];
+BridgesIndexCtrl.$inject = ['$scope', '$location', 'Bridge'];
 
 BridgesCreateCtrl = ($scope, $location, Bridge, Discover) ->
   $scope.availableBridges = null
@@ -20,7 +28,7 @@ BridgesCreateCtrl = ($scope, $location, Bridge, Discover) ->
   $scope.save = ($index) ->
     $scope.retryIndex = null
     Bridge.save $scope.availableBridges[$index], (bridge) ->
-      #$location.path "/bridges/#{bridge.id}"
+      $location.path "/bridges"
       if bridge.error?
         $scope.retryIndex = $index
       else

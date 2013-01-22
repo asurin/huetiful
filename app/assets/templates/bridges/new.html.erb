@@ -30,14 +30,13 @@
       <ng-form name="add" ui-if="bridge.registered == undefined">
         <div class="hue-add">
             <div class="row">
-              <input type="text" name="bridgeName" ng-model="bridge.username" placeholder="Enter the name you'd like to use for this bridge" required ng-minlength="10" ng-maxlength="40" ng-pattern="/^[a-zA-Z0-9]+$/">
+              <input type="text" name="bridgeName" ng-model="bridge.name" placeholder="Enter the name you'd like to use for this bridge" required ng-minlength="1" ng-maxlength="40">
               <button class="btn btn-success" ng-disabled="add.$invalid" ng-click="save($index)"><i class="icon-plus"></i></button>
             </div>
             <div class="row alert alert-error" ng-show="add.$invalid">
-              <span class="error" ng-show="add.bridgeName.$error.required">You must enter a username</span>
-              <span class="error" ng-show="add.bridgeName.$error.minlength">Minimum length is 10 characters</span>
+              <span class="error" ng-show="add.bridgeName.$error.required">You must enter a name for this bridge</span>
+              <span class="error" ng-show="add.bridgeName.$error.minlength">Minimum length is 1 character</span>
               <span class="error" ng-show="add.bridgeName.$error.maxlength">Maximum length is 40 characters</span>
-              <span class="error" ng-show="add.bridgeName.$error.pattern">Name must contain only alphanumeric characters</span>
             </div>
         </div>
       </ng-form>

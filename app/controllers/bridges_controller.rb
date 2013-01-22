@@ -5,6 +5,10 @@ class BridgesController < ApplicationController
     render :json => Bridge.all
   end
 
+  def show
+    render :json => Bridge.find(params[:id])
+  end
+
   def discover
     begin
       hues = [*Ruhue.discover]
@@ -28,21 +32,31 @@ class BridgesController < ApplicationController
     begin
       # TODO: More detailed error handling, specifically the case where we can no longer find the hue passed up
       host = params[:host]
-      username = params[:username]
+      name = params[:name]
       bridge = Bridge.find_by_host(host)
       hues = [*Ruhue.discover]
       hue = nil
       hues.each { |opt| hue = opt if opt.host == host }
-      client = Ruhue::Client.new(hue, username)
+      client = Ruhue::Client.new(hue, 'huetifulapp')
       unless client.registered?
         bridge.delete! unless bridge.nil?
-        client.register('Huetiful')
-        bridge = Bridge.new(:host => host, :username => client.username, :name => 'Huetiful', :registered => true)
+        client.register(name)
+        bridge = Bridge.new(:host => host, :username => client.username, :name => name, :registered => true)
         bridge.save!
       end
       if bridge.nil?
-        bridge = Bridge.new(:host => host, :username => client.username, :name => 'Huetiful', :registered => true)
+        bridge = Bridge.new(:host => host, :username => client.username, :name => name, :registered => true)
         bridge.save!
+        group = bridge.groups.build
+        group.name = "All Lights"
+        group.save!
+        lights = client.get('lights')
+        lights.data.each do |key,light|
+          detailed_light = client.get("lights/#{key}")
+          model_light = group.lights.build
+          model_light.from_response(detailed_light)
+          model_light.save!
+        end
       end
       render :json => bridge
     rescue Exception => e
