@@ -2,8 +2,7 @@ class Light < ActiveRecord::Base
 
   has_and_belongs_to_many       :groups
 
-  def from_response(response)
-    light_data = response.data
+  def from_response(light_data)
     state = light_data['state']
     self.name = light_data['name']
     self.on = state['on']

@@ -11,12 +11,12 @@ class BridgesController < ApplicationController
 
   def discover
     begin
-      hues = [*Ruhue.discover]
+      hues = Hue.discover
       bridges = Array.new
-      hues.each do |hue|
-        bridge = Bridge.find_by_host(hue.host)
-        if bridge.nil? || !Ruhue::Client.new(hue, bridge.username).registered?
-          bridges << hue
+      hues.each do |hue_host|
+        bridge = Bridge.find_by_host(hue_host)
+        if bridge.nil? || !Hue.new(hue_host, bridge.username).registered?
+          bridges << {:host => hue_host}
         else
           bridges << bridge
         end
@@ -30,29 +30,23 @@ class BridgesController < ApplicationController
 
   def create
     begin
-      # TODO: More detailed error handling, specifically the case where we can no longer find the hue passed up
       host = params[:host]
       name = params[:name]
       bridge = Bridge.find_by_host(host)
-      hues = [*Ruhue.discover]
-      hue = nil
-      hues.each { |opt| hue = opt if opt.host == host }
-      client = Ruhue::Client.new(hue, 'huetifulapp')
-      unless client.registered?
+      hue = Hue.new(host, 'huetifulapp')
+      unless hue.registered?
         bridge.delete! unless bridge.nil?
-        client.register(name)
-        bridge = Bridge.new(:host => host, :username => client.username, :name => name, :registered => true)
+        hue.register(name)
+        bridge = Bridge.new(:host => host, :username => 'huetifulapp', :name => name, :registered => true)
         bridge.save!
       end
       if bridge.nil?
-        bridge = Bridge.new(:host => host, :username => client.username, :name => name, :registered => true)
+        bridge = Bridge.new(:host => host, :username => 'huetifulapp', :name => name, :registered => true)
         bridge.save!
-        group = bridge.groups.build
-        group.name = "All Lights"
+        group = bridge.groups.build(:name => "All Lights", :all_group => true)
         group.save!
-        lights = client.get('lights')
-        lights.data.each do |key,light|
-          detailed_light = client.get("lights/#{key}")
+        hue.lights.each do |key,light|
+          detailed_light = hue.light(key)
           model_light = group.lights.build
           model_light.from_response(detailed_light)
           model_light.save!
