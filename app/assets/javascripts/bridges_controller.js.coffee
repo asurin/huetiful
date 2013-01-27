@@ -39,14 +39,29 @@ BridgesCreateCtrl = ($scope, $location, Bridge, Discover) ->
 
 BridgesCreateCtrl.$inject = ['$scope', '$location', 'Bridge', 'Discover'];
 
-BridgesShowCtrl = ($scope, $location, $routeParams, Bridge) ->
+BridgesShowCtrl = ($scope, $location, $routeParams, Bridge, Light) ->
   Bridge.get
-    id: $routeParams.id
-  , (bridge) ->
-    self.original = bridge
-    $scope.bridge = new Bridge(self.original)
+    id: $routeParams.id, (bridge) ->
+      self.original = bridge
+      $scope.bridge = new Bridge(self.original)
+      console.log($scope.bridge)
+  $scope.lightOff = (lightIndex) ->
+    lightToUpdate = $scope.bridge.lights[lightIndex]
+    lightToUpdate.on = false
+    $scope.updateLight(lightToUpdate)
+  $scope.lightOn = (lightIndex) ->
+    lightToUpdate = $scope.bridge.lights[lightIndex]
+    lightToUpdate.on = true
+    $scope.updateLight(lightToUpdate)
+  $scope.updateLight = (light) ->
+    self.original = light
+    wrappedLight = new Light(self.original)
+    wrappedLight.$update
+      id: light.id, (new_light) ->
+        for light, index in $scope.bridge.lights
+          $scope.bridge.lights[index] = new_light if $scope.bridge.lights[index].id == new_light.id
 
-BridgesShowCtrl.$inject = ['$scope', '$location', '$routeParams', 'Bridge'];
+BridgesShowCtrl.$inject = ['$scope', '$location', '$routeParams', 'Bridge', 'Light'];
 
 BridgesEditCtrl = ($scope, $location, $routeParams, Bridge) ->
   self = this
@@ -64,7 +79,6 @@ BridgesEditCtrl = ($scope, $location, $routeParams, Bridge) ->
     if dconfirm
       $scope.bridge.destroy ->
         $location.path "/bridges"
-
 
   $scope.save = ->
     Bridge.update $scope.bridge, (bridge) ->

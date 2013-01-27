@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20130119231317) do
 
   create_table "lights", :force => true do |t|
     t.string   "name"
+    t.integer  "number"
     t.boolean  "on"
     t.integer  "brightness"
     t.integer  "hue"

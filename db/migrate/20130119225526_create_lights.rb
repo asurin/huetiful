@@ -2,6 +2,7 @@ class CreateLights < ActiveRecord::Migration
   def change
     create_table :lights do |t|
       t.string          :name
+      t.integer         :number
       t.boolean         :on
       t.integer         :brightness
       t.integer         :hue

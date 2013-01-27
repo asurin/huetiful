@@ -6,7 +6,7 @@ class BridgesController < ApplicationController
   end
 
   def show
-    render :json => Bridge.find(params[:id])
+    @bridge = Bridge.find(params[:id])
   end
 
   def discover
@@ -48,8 +48,9 @@ class BridgesController < ApplicationController
         hue.lights.each do |key,light|
           detailed_light = hue.light(key)
           model_light = group.lights.build
-          model_light.from_response(detailed_light)
+          model_light.from_hue(key, detailed_light)
           model_light.save!
+          group.lights << model_light
         end
       end
       render :json => bridge

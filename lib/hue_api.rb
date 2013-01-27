@@ -24,4 +24,9 @@ class Hue
     @client.get("lights/#{light_number}").data
   end
 
+  def light=(light)
+    response = @client.put("lights/#{light.number}/state", light.to_hue)
+    puts response
+  end
+
 end

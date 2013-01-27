@@ -1,40 +1,10 @@
-<h1>Bridge</h1>
-
-<p>
-  <b>Name</b><br>
-  {{bridge.name}}
-</p>
-
-<p>
-  <b>Ip address</b><br>
-  {{bridge.ip_address}}
-</p>
-
-<p>
-  <b>Mac address</b><br>
-  {{bridge.mac_address}}
-</p>
-
-<p>
-  <b>Username</b><br>
-  {{bridge.username}}
-</p>
-
-<p>
-  <b>Valid</b><br>
-  {{bridge.valid}}
-</p>
-
-<div class="form-actions">
-  <a href="/bridges/{{bridge.id}}/edit"
-    class="btn btn-primary"><i class="icon-edit"></i>
-    Edit Bridge
-  </a>
-  <button ng-click="destroy()" class="btn btn-danger">
-    <i class="icon-trash"></i> Delete
-  </button>
-  <a href="/bridges" class="btn">
-    Back to bridges
-  </a>
+<h1>{{bridge.name}}</h1>
+<div ng-repeat="light in bridge.lights">
+  {{light.name}}
+  <div ui-if="light.on">
+    <button class= "btn btn-success" ng-click="lightOff($index)">On</button>
+  </div>
+  <div ui-if="!light.on">
+    <button class= "btn btn-danger" ng-click="lightOn($index)">Off</button>
+  </div>
 </div>
-

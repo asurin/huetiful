@@ -5,9 +5,10 @@ Huetiful::Application.routes.draw do
 
   resources :bridges do
     get 'discover', :on => :collection
-    resources :groups do
-      resources :lights
-    end
   end
+
+  resources :groups
+
+  resources :lights
 
 end
