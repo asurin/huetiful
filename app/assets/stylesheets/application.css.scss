@@ -31,3 +31,15 @@
     color: #327CCB;
   }
 }
+
+.light + .light {
+  border-top: 1px solid #eee;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+.light {
+  line-height: 60px;
+  .light-icon {
+    font-size: 64px;
+  }
+}

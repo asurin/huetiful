@@ -6,4 +6,8 @@ class Bridge < ActiveRecord::Base
   def all_lights
     self.groups.first.lights
   end
+
+  def hue_controller
+    Hue.new(host, 'huetifulapp')
+  end
 end

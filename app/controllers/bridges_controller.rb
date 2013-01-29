@@ -7,6 +7,10 @@ class BridgesController < ApplicationController
 
   def show
     @bridge = Bridge.find(params[:id])
+    @bridge.all_lights.each do |light|
+      light.update_from_hue(@bridge)
+      light.save!
+    end
   end
 
   def discover
@@ -33,7 +37,7 @@ class BridgesController < ApplicationController
       host = params[:host]
       name = params[:name]
       bridge = Bridge.find_by_host(host)
-      hue = Hue.new(host, 'huetifulapp')
+      hue = bridge.hue_controller
       unless hue.registered?
         bridge.delete! unless bridge.nil?
         hue.register(name)
