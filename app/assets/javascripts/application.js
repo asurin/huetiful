@@ -15,4 +15,5 @@
 //= require_tree ./angularjs/
 //= require angular-ui
 //= require bootstrap
-//= require_tree .
+//= require_directory .
+//= require_tree ./directives

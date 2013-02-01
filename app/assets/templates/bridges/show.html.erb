@@ -1,7 +1,10 @@
 <h1>{{bridge.name}}</h1>
 <div ng-repeat="light in bridge.lights" class="light row clearfix">
   <span class="span1 light-icon"><i class="icon-lightbulb" style="color: {{light.rgb}};"></i></span>
-  <h3 class="span8">{{light.name}}</h3>
+  <h3 class="span6">{{light.name}}</h3>
+  <div class="span2">
+    <a href="" class="btn" index="{{$index}}" data-color="{{light.rgb}}" colorpicker="switchColor">Pick a color!</a>
+  </div>
   <div class="span2 pull-right">
       <div ui-if="light.on">
         <button class="btn btn-success" ng-click="lightOff($index)">On</button>

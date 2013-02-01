@@ -12,7 +12,7 @@ group :assets do
   gem 'bourbon'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.1.4'
 gem 'thin'
 gem 'faye-rails'
 gem 'angularjs_scaffold'

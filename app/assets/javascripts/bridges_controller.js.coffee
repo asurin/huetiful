@@ -44,7 +44,6 @@ BridgesShowCtrl = ($scope, $location, $routeParams, Bridge, Light) ->
     id: $routeParams.id, (bridge) ->
       self.original = bridge
       $scope.bridge = new Bridge(self.original)
-      console.log($scope.bridge)
   $scope.lightOff = (lightIndex) ->
     lightToUpdate = $scope.bridge.lights[lightIndex]
     lightToUpdate.on = false
@@ -53,13 +52,15 @@ BridgesShowCtrl = ($scope, $location, $routeParams, Bridge, Light) ->
     lightToUpdate = $scope.bridge.lights[lightIndex]
     lightToUpdate.on = true
     $scope.updateLight(lightToUpdate)
+  $scope.switchColor = (index, color) ->
+    light = $scope.bridge.lights[index]
+    light.rgb = color
+    $scope.updateLight(light)
   $scope.updateLight = (light) ->
     self.original = light
     wrappedLight = new Light(self.original)
     wrappedLight.$update
-      id: light.id, (new_light) ->
-        for light, index in $scope.bridge.lights
-          $scope.bridge.lights[index] = new_light if $scope.bridge.lights[index].id == new_light.id
+      id: light.id
 
 BridgesShowCtrl.$inject = ['$scope', '$location', '$routeParams', 'Bridge', 'Light'];
 
