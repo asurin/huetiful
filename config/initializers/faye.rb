@@ -1,0 +1,1 @@
+#Faye.ensure_reactor_running!

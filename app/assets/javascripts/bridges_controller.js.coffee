@@ -40,6 +40,11 @@ BridgesCreateCtrl = ($scope, $location, Bridge, Discover) ->
 BridgesCreateCtrl.$inject = ['$scope', '$location', 'Bridge', 'Discover'];
 
 BridgesShowCtrl = ($scope, $location, $routeParams, Bridge, Light) ->
+  $scope.fayeClient = new Faye.Client('http://localhost:9292/faye')
+  $scope.updateHandler = $scope.fayeClient.subscribe '/lights', (message) ->
+    console.log('---')
+    console.log(message)
+    console.log('+++')
   Bridge.get
     id: $routeParams.id, (bridge) ->
       self.original = bridge

@@ -14,7 +14,7 @@ end
 
 gem 'jquery-rails', '~> 2.1.4'
 gem 'thin'
-gem 'faye-rails'
+gem 'faye'
 gem 'angularjs_scaffold'
 gem 'font-awesome-rails'
 gem 'angular-ui-rails'

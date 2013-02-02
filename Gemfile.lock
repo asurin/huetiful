@@ -68,9 +68,6 @@ GEM
       faye-websocket (>= 0.4.0)
       rack (>= 1.0.0)
       yajl-ruby (>= 1.0.0)
-    faye-rails (1.0.4)
-      eventmachine (~> 1.0.0)
-      faye (~> 0.8.8)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     font-awesome-rails (3.0.1.0)
@@ -168,7 +165,7 @@ DEPENDENCIES
   bourbon
   coffee-rails
   color-tools
-  faye-rails
+  faye
   font-awesome-rails
   jquery-rails (~> 2.1.4)
   mysql2

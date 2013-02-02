@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "http://#{request.host}:9292/faye.js" %>
     <meta id='csrf' ng-controller="CsrfCtrl" data-csrf="<%= form_authenticity_token%>"/>
 
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
