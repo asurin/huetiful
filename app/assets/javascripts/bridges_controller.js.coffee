@@ -42,13 +42,19 @@ BridgesCreateCtrl.$inject = ['$scope', '$location', 'Bridge', 'Discover'];
 BridgesShowCtrl = ($scope, $location, $routeParams, Bridge, Light) ->
   $scope.fayeClient = new Faye.Client('http://localhost:9292/faye')
   $scope.updateHandler = $scope.fayeClient.subscribe '/lights', (message) ->
-    console.log('---')
-    console.log(message)
-    console.log('+++')
+    messageJSON = JSON.parse(message)
+    for light, index in $scope.lights
+      if light.id == messageJSON.id
+        $scope.$apply ->
+          wrapped_light = new Light(light)
+          wrapped_light.updateFromJSON(messageJSON)
+          console.log(wrapped_light.rgb)
+          $scope.lights[index] = wrapped_light
   Bridge.get
     id: $routeParams.id, (bridge) ->
       self.original = bridge
       $scope.bridge = new Bridge(self.original)
+      $scope.lights = bridge.lights
   $scope.lightOff = (lightIndex) ->
     lightToUpdate = $scope.bridge.lights[lightIndex]
     lightToUpdate.on = false

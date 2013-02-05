@@ -12,6 +12,8 @@ class LightsController < ApplicationController
     assignable_params.delete :action
     assignable_params.delete :controller
     assignable_params.delete :light
+    assignable_params.delete :created_at
+    assignable_params.delete :updated_at
     # We may need to merge.  Not sure what desired behavior is - full override, or override-changed?
     @light.update_attributes(assignable_params)
     bridge = @light.groups.first.bridge # Short-circuit this?

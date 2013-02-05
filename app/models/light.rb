@@ -111,4 +111,10 @@ class Light < ActiveRecord::Base
     self.brightness = (v / 100.0 * 255.0).round
   end
 
+  def as_json(options = {})
+    json = super(options)
+    json['rgb'] = self.rgb
+    json
+  end
+
 end
